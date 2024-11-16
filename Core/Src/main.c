@@ -47,6 +47,9 @@ UART_HandleTypeDef huart1;
 
 osThreadId defaultTaskHandle;
 osThreadId HeartBeatHandle;
+osThreadId SerialBeatHandle;
+uint32_t SerialBeatBuffer[ 64 ];
+osStaticThreadDef_t SerialBeatControlBlock;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -58,6 +61,7 @@ static void MX_RTC_Init(void);
 static void MX_USART1_UART_Init(void);
 void StartDefaultTask(void const * argument);
 extern void HeartBeat_(void const * argument);
+extern void serial_beat(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -127,6 +131,10 @@ int main(void)
   /* definition and creation of HeartBeat */
   osThreadDef(HeartBeat, HeartBeat_, osPriorityIdle, 0, 64);
   HeartBeatHandle = osThreadCreate(osThread(HeartBeat), NULL);
+
+  /* definition and creation of SerialBeat */
+  osThreadStaticDef(SerialBeat, serial_beat, osPriorityIdle, 0, 64, SerialBeatBuffer, &SerialBeatControlBlock);
+  SerialBeatHandle = osThreadCreate(osThread(SerialBeat), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
