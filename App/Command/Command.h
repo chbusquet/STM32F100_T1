@@ -26,6 +26,19 @@ struct a_command {
 	int				(*funname)(char *command_parameters);
 };
 
+#define REGISTER_COMMAND_EX(NAME/*, help*/) __attribute__ ((section(".command"))) \
+	struct a_command NAME ## _structh = { 			\
+			.command_name 			= #NAME, 		\
+	/*		.command_help_string	= (help),*/		\
+			.funname				= (NAME),		\
+	};
+
+#define REGISTER_COMMAND_EX_HELP(NAME, help) __attribute__ ((section(".command"))) \
+	struct a_command NAME ## _struct = { 			\
+			.command_name 			= #NAME, 		\
+			.command_help_string	= (help),		\
+			.funname				= (NAME),		\
+	};
 
 //int nop(char *c);
 
