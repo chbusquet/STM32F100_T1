@@ -85,6 +85,11 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
+/*
+ * Include command memory location specification
+ */
+INCLUDE "../App/Command/Command.ld"
+
   .ARM.extab (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
     . = ALIGN(4);
