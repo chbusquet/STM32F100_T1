@@ -47,6 +47,8 @@ UART_HandleTypeDef huart1;
 
 osThreadId defaultTaskHandle;
 osThreadId HeartBeatHandle;
+uint32_t HeartBeatBuffer[ 64 ];
+osStaticThreadDef_t HeartBeatControlBlock;
 osThreadId SerialBeatHandle;
 uint32_t SerialBeatBuffer[ 64 ];
 osStaticThreadDef_t SerialBeatControlBlock;
@@ -129,7 +131,7 @@ int main(void)
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of HeartBeat */
-  osThreadDef(HeartBeat, HeartBeat_, osPriorityIdle, 0, 64);
+  osThreadStaticDef(HeartBeat, HeartBeat_, osPriorityIdle, 0, 64, HeartBeatBuffer, &HeartBeatControlBlock);
   HeartBeatHandle = osThreadCreate(osThread(HeartBeat), NULL);
 
   /* definition and creation of SerialBeat */

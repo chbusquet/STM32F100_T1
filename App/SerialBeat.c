@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "main.h"
 
+#include "../App/Command/Command.h"
 
 void serial_beat(void)
 {
