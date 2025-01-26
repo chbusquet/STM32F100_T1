@@ -10,7 +10,8 @@
 extern UART_HandleTypeDef huart1;
 #define SERIAL_TIME_OUT		100
 
-int __io_putchar(int ch) {
+int __io_putchar(int ch) 
+{
 
 	int retStat = 0;
 	HAL_StatusTypeDef HAL_Status = HAL_OK;
@@ -18,9 +19,10 @@ int __io_putchar(int ch) {
 
 	HAL_Status = HAL_UART_Transmit( &huart1, &c, 1, SERIAL_TIME_OUT);
 
-	if(HAL_Status != HAL_OK)
+	if(HAL_Status != HAL_OK) {
 		retStat = -1;
-	else
+	} else {
 		retStat = 0;
+	}
 	return retStat;
 }
