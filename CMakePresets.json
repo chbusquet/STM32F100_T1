@@ -1,0 +1,39 @@
+{
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 4,
+        "$comment": [
+            "first line of comment",
+            "second line of comment",
+            "we use CMake 4.xx"
+        ] 
+    },
+    "include" :[
+
+    ],
+    "configurePresets": [
+        {
+        "name" :"default"
+        },
+        {
+            "name": "debug"
+        },
+        {
+            "name": "release"
+        }
+    ],
+    "buildPresets": [
+        {
+        "name" :"default"
+        },
+        {
+            "name": "debug"
+        },
+        {
+            "name": "release"
+        }
+    ],
+    "workflowPresets": [
+
+    ],
+}
